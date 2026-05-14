@@ -1,0 +1,12 @@
+  function odswiezStrone() {
+    var url = "https://api.vercel.com/v1/integrations/deploy/prj_eHMVdg9dVP3BYZ4EVHzvXOK0YxPc/0wUkyCCARf";
+    var response = UrlFetchApp.fetch(url, { method: "post" });
+    SpreadsheetApp.getUi().alert("Strona się przebudowuje! Poczekaj ok. 30 sekund.");
+  }
+
+  function onOpen() {
+    SpreadsheetApp.getUi()
+      .createMenu("Strona")
+      .addItem("Odśwież stronę", "odswiezStrone")
+      .addToUi();
+  }
