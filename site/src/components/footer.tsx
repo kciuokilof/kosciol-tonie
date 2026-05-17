@@ -12,7 +12,7 @@ export function Footer() {
                 Parafia św. Stanisława BM
               </p>
               <p className="text-sm text-navy-300">
-                ul. Gaik 7, 31-338 Kraków-Tonie
+                ul. Maciejkowa 3, 31-336 Kraków-Tonie
               </p>
             </div>
           </div>

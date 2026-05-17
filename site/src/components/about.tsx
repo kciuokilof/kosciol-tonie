@@ -27,7 +27,7 @@ export function About() {
             Parafia pw. św. Stanisława Biskupa Męczennika w Krakowie-Toniach to
             wspólnota wiernych działająca w ramach Archidiecezji Krakowskiej,
             w dekanacie Kraków-Krowodrza. Nasz kościół parafialny, położony
-            przy ul. Gaik 7, jest miejscem codziennej modlitwy, celebracji
+            przy ul. Maciejkowej 3, jest miejscem codziennej modlitwy, celebracji
             sakramentów i spotkań wspólnotowych.
           </p>
           <p>
