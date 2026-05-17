@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useScrollReveal, revealStyle } from "@/hooks/use-scroll-reveal";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Check, Copy } from "lucide-react";
 import type { ContactInfo } from "@/lib/sheets";
 
 interface ContactProps {
@@ -10,24 +11,26 @@ interface ContactProps {
 
 export function Contact({ contact }: ContactProps) {
   const { ref, visible } = useScrollReveal();
+  const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
 
   const contactInfo = [
     {
       icon: MapPin,
       label: "Adres",
       value: contact.address,
+      copyable: true,
     },
     {
       icon: Phone,
       label: "Telefon",
       value: contact.phone,
-      href: `tel:${contact.phone.replace(/\s/g, "")}`,
+      copyable: true,
     },
     {
       icon: Mail,
       label: "E-mail",
       value: contact.email,
-      href: `mailto:${contact.email}`,
+      copyable: true,
     },
     {
       icon: Clock,
@@ -70,10 +73,38 @@ export function Contact({ contact }: ContactProps) {
                 </div>
               );
 
-              return "href" in c && c.href ? (
-                <a key={c.label} href={c.href} className="block">
-                  {content}
-                </a>
+              return "copyable" in c && c.copyable ? (
+                <button
+                  key={c.label}
+                  type="button"
+                  className="block w-full text-left"
+                  onClick={() => {
+                    navigator.clipboard.writeText(c.value);
+                    setCopiedLabel(c.label);
+                    setTimeout(() => setCopiedLabel(null), 2000);
+                  }}
+                >
+                  <div className="flex items-start gap-4 rounded-xl border border-navy-100 bg-white p-5 shadow-sm transition-all hover:shadow-md">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold-50">
+                      <Icon className="size-5 text-gold-600" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-navy-500">
+                        {c.label}
+                      </p>
+                      <p className="mt-0.5 font-medium text-navy-800">
+                        {c.value}
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 items-center self-center text-navy-400">
+                      {copiedLabel === c.label ? (
+                        <Check className="size-4 text-green-500" />
+                      ) : (
+                        <Copy className="size-4" />
+                      )}
+                    </div>
+                  </div>
+                </button>
               ) : (
                 <div key={c.label}>{content}</div>
               );
@@ -84,17 +115,32 @@ export function Contact({ contact }: ContactProps) {
           <div
             className="overflow-hidden rounded-xl border border-navy-100 shadow-sm"
             style={revealStyle(visible, 400)}
+            role="region"
+            aria-label="Mapa lokalizacji parafii"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2559.0!2d19.886!3d50.106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47164457b18e7c33%3A0x4b52ae38d2726ec0!2sGaik%207%2C%2031-992%20Krak%C3%B3w!5e0!3m2!1spl!2spl!4v1"
+              src="https://www.google.com/maps?q=Maciejkowa+3,+31-336+Krak%C3%B3w,+Poland&hl=pl&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0, minHeight: 360 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Mapa — Parafia Tonie"
+              title="Mapa lokalizacji — Parafia św. Stanisława BM, ul. Maciejkowa 3, Kraków-Tonie"
             />
+            <noscript>
+              <p className="p-4 text-sm text-navy-600">
+                ul. Maciejkowa 3, 31-336 Kraków-Tonie —{" "}
+                <a
+                  href="https://www.google.com/maps?q=Maciejkowa+3,+31-336+Krak%C3%B3w,+Poland"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  Zobacz na Google Maps
+                </a>
+              </p>
+            </noscript>
           </div>
         </div>
       </div>

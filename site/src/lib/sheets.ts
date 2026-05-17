@@ -116,7 +116,7 @@ const FALLBACK_ANNOUNCEMENTS: Announcement[] = [
 ];
 
 const FALLBACK_CONTACT: ContactInfo = {
-  address: "ul. Gaik 7, 31-338 Kraków",
+  address: "ul. Maciejkowa 3, 31-334 Kraków",
   phone: "+48 12 635 17 44",
   email: "toniestanislaw@wp.pl",
   officeHours: "po Mszy Świętej, zachęcamy do kontaktu telefonicznego",

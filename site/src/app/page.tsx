@@ -8,6 +8,7 @@ import { Sacraments } from "@/components/sacraments";
 import { Announcements } from "@/components/announcements";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
+import { StructuredData } from "@/components/structured-data";
 import { getMassTimes, getAnnouncements, getContactInfo } from "@/lib/sheets";
 
 export default async function Home() {
@@ -27,6 +28,7 @@ export default async function Home() {
 
   return (
     <>
+      <StructuredData sundayMasses={massTimes.sunday} weekdayMasses={massTimes.weekday} />
       <Nav />
       <main>
         <Hero />

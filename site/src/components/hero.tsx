@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -19,9 +20,12 @@ export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/hero.jpg')" }}
+      <Image
+        src="/hero.jpg"
+        alt="Kościół parafialny św. Stanisława Biskupa Męczennika w Krakowie-Toniach"
+        fill
+        priority
+        className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-900/70 via-navy-900/50 to-navy-900/80" />
 

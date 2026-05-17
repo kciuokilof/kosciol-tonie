@@ -31,7 +31,7 @@ export function Nav() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4" aria-label="Menu główne">
         <a
           href="#"
           className={`flex items-center gap-2 font-serif text-lg font-semibold transition-colors ${
